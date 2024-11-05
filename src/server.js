@@ -1,5 +1,5 @@
 const express = require('express');
-// const cors = require('cors');
+const cors = require('cors');
 const dotenv = require('dotenv');
 // const session = require('express-session');
 const OpenAI = require('openai'); // Updated import
@@ -11,18 +11,18 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
-// app.use(session({
-//   secret: process.env.SESSION_SECRET || 'your-secret-key',
-//   resave: false,
-//   saveUninitialized: false,
-//   cookie: {
-//     secure: process.env.NODE_ENV === 'production',
-//     httpOnly: true,
-//     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
-//   }
-// }));
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'your-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+  }
+}));
 
 // Initialize OpenAI
 const openai = new OpenAI({
