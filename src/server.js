@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-// const session = require('express-session');
+const session = require('express-session');
 const OpenAI = require('openai'); // Updated import
 // Load environment variables
 dotenv.config();
