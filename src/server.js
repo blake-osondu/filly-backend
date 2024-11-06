@@ -73,7 +73,7 @@ app.post('/api/process-form', async (req, res) => {
   const prompt = `
     I have a web form with the following fields:
     ${formMap.map(field => `
-      - Field: ${field.label || field.name || field.id}
+      - Field: ${field.id}
       - Type: ${field.type}
       - Context: ${field.nearbyText}
     `).join('\n')}
