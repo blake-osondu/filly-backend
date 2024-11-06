@@ -84,7 +84,7 @@ app.post('/api/process-form', async (req, res) => {
 
     // Call OpenAI API
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4o-2024-08-06",
       messages: [
         { 
           role: "system", 
@@ -95,9 +95,9 @@ app.post('/api/process-form', async (req, res) => {
           content: prompt
         }
       ],
-      response_format: zodResponseFormat(ProcessedData, "processedData")
+      response_format: zodResponseFormat.zodResponseFormat(ProcessedData, "processedData")
     });
-
+    
     res.json({ 
       success: true,
       processedData: completion.choices[0].message.parsed
