@@ -80,6 +80,7 @@ app.post('/api/process-form', async (req, res) => {
 
     Please analyze the form fields and provide the appropriate values from the user information.
     Return the response as an array of JSON objects where the keys are the field IDs and the values are what should be filled in.
+    Be sure to use the same id, label, or name as provided by the form.
   `;
 
     // Call OpenAI API
