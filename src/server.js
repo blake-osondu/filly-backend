@@ -84,7 +84,7 @@ app.post('/api/process-form', async (req, res) => {
         }
       ]
     });
-
+    console.log(completion.choices[0].message.content);
     res.json({ 
       success: true,
       data: completion.choices[0].message.content 
