@@ -3,6 +3,8 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const OpenAI = require('openai'); // Updated import
+import { z } from "zod";
+import { zodResponseFormat } from "openai/helpers/zod";
 // Load environment variables
 dotenv.config();
 
@@ -45,6 +47,16 @@ app.get('/api/key-status', (req, res) => {
 
 // Process form data
 app.post('/api/process-form', async (req, res) => {
+
+  const Input = z.object({
+      element: z.string(),
+      value: z.string()
+  });
+
+  const ProcessedData = z.object({
+      mappedFields: z.array(Input)
+  });
+
   try {
     const { formMap, userData } = req.body;
 
@@ -82,12 +94,12 @@ app.post('/api/process-form', async (req, res) => {
           content: prompt
         }
       ],
-      response_format: { "type": "json_object" }
+      response_format: zodResponseFormat(ProcessedData, "processedData")
     });
-    console.log(completion.choices[0].message.content);
+
     res.json({ 
       success: true,
-      data: completion.choices[0].message.content 
+      processedData: completion.choices[0].message.parsed
     });
 
   } catch (error) {
