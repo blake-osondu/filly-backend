@@ -66,7 +66,7 @@ app.post('/api/process-form', async (req, res) => {
     ${userData}
 
     Please analyze the form fields and provide the appropriate values from the user information.
-    Return the response as a JSON object where the keys are the field IDs and the values are what should be filled in.
+    Return the response as an array of JSON objects where the keys are the field IDs and the values are what should be filled in.
   `;
 
     // Call OpenAI API
@@ -81,7 +81,8 @@ app.post('/api/process-form', async (req, res) => {
           role: "user",
           content: prompt
         }
-      ]
+      ],
+      response_format: { "type": "json_object" }
     });
     console.log(completion.choices[0].message.content);
     res.json({ 
