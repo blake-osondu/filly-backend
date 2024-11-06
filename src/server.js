@@ -69,19 +69,19 @@ app.post('/api/process-form', async (req, res) => {
     Return the response as a JSON object where the keys are the field IDs and the values are what should be filled in.
   `;
     // Call OpenAI API
-    // const completion = await openai.createChatCompletion({
-    //   model: "gpt-3.5-turbo",
-    //   messages: [
-    //     { 
-    //       role: "system", 
-    //       content: "You are a helpful assistant that fills out forms based on user data." 
-    //     },
-    //     {
-    //       role: "user",
-    //       content: prompt
-    //     }
-    //   ]
-    // });
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [
+        { 
+          role: "system", 
+          content: "You are a helpful assistant that fills out forms based on user data." 
+        },
+        {
+          role: "user",
+          content: prompt
+        }
+      ]
+    });
 
     res.json({ 
       success: true,
