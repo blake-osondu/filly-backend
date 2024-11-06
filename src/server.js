@@ -49,7 +49,7 @@ app.get('/api/key-status', (req, res) => {
 app.post('/api/process-form', async (req, res) => {
 
   const Input = z.object({
-      element: z.string(),
+      id: z.string(),
       value: z.string()
   });
 
