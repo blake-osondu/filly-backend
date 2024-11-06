@@ -51,6 +51,9 @@ app.post('/api/process-form', async (req, res) => {
 
   const Input = z.object({
       id: z.string(),
+      name: z.string(),
+      type: z.string(),
+      placeholder: z.string(),
       value: z.string()
   });
 
