@@ -97,9 +97,9 @@ app.post('/api/process-form', async (req, res) => {
       ],
       response_format: zodResponseFormat.zodResponseFormat(ProcessedData, "processedData")
     });
-    
+    console.log(completion.choices[0].message);
     const processedData = completion.choices[0].message.parsed;
-    
+
     console.log(processedData);
 
     res.json({ 
