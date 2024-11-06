@@ -53,7 +53,6 @@ app.post('/api/process-form', async (req, res) => {
         error: 'Missing required fields' 
       });
     }
-  console.log(req.body);
     // Prepare the prompt for GPT
   const prompt = `
     I have a web form with the following fields:
@@ -69,7 +68,7 @@ app.post('/api/process-form', async (req, res) => {
     Please analyze the form fields and provide the appropriate values from the user information.
     Return the response as a JSON object where the keys are the field IDs and the values are what should be filled in.
   `;
-  console.log(prompt);
+
     // Call OpenAI API
     const completion = await openai.chat.completions.create({
       model: "gpt-4o",
