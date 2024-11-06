@@ -45,56 +45,57 @@ app.get('/api/key-status', (req, res) => {
 
 // Process form data
 app.post('/api/process-form', async (req, res) => {
-  try {
-    const { formMap, userData } = req.body;
+  res.send({ 'message': 'Hello process form!'});
+  // try {
+  //   const { formMap, userData } = req.body;
 
-    if (!formMap || !userData) {
-      return res.status(400).json({ 
-        error: 'Missing required fields' 
-      });
-    }
-    // Prepare the prompt for GPT
-  const prompt = `
-    I have a web form with the following fields:
-    ${formMap.map(field => `
-      - Field: ${field.label || field.name || field.id}
-      - Type: ${field.type}
-      - Context: ${field.nearbyText}
-    `).join('\n')}
+  //   if (!formMap || !userData) {
+  //     return res.status(400).json({ 
+  //       error: 'Missing required fields' 
+  //     });
+  //   }
+  //   // Prepare the prompt for GPT
+  // const prompt = `
+  //   I have a web form with the following fields:
+  //   ${formMap.map(field => `
+  //     - Field: ${field.label || field.name || field.id}
+  //     - Type: ${field.type}
+  //     - Context: ${field.nearbyText}
+  //   `).join('\n')}
 
-    And I have the following user information:
-    ${userData}
+  //   And I have the following user information:
+  //   ${userData}
 
-    Please analyze the form fields and provide the appropriate values from the user information.
-    Return the response as a JSON object where the keys are the field IDs and the values are what should be filled in.
-  `;
-    // Call OpenAI API
-    const completion = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [
-        { 
-          role: "system", 
-          content: "You are a helpful assistant that fills out forms based on user data." 
-        },
-        {
-          role: "user",
-          content: prompt
-        }
-      ]
-    });
+  //   Please analyze the form fields and provide the appropriate values from the user information.
+  //   Return the response as a JSON object where the keys are the field IDs and the values are what should be filled in.
+  // `;
+  //   // Call OpenAI API
+  //   const completion = await openai.createChatCompletion({
+  //     model: "gpt-3.5-turbo",
+  //     messages: [
+  //       { 
+  //         role: "system", 
+  //         content: "You are a helpful assistant that fills out forms based on user data." 
+  //       },
+  //       {
+  //         role: "user",
+  //         content: prompt
+  //       }
+  //     ]
+  //   });
 
-    res.json({ 
-      success: true,
-      data: completion.data.choices[0].message.content 
-    });
+  //   res.json({ 
+  //     success: true,
+  //     data: completion.data.choices[0].message.content 
+  //   });
 
-  } catch (error) {
-    console.error('Error processing form:', error);
-    res.status(500).json({ 
-      error: 'Failed to process form',
-      message: error.message 
-    });
-  }
+  // } catch (error) {
+  //   console.error('Error processing form:', error);
+  //   res.status(500).json({ 
+  //     error: 'Failed to process form',
+  //     message: error.message 
+  //   });
+  // }
 });
 
 // Error handling middleware
