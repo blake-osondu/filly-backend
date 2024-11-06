@@ -3,8 +3,9 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const OpenAI = require('openai'); // Updated import
-import { z } from "zod";
-import { zodResponseFormat } from "openai/helpers/zod";
+const z = require("zod");
+const zodResponseFormat = require("openai/helpers/zod");
+
 // Load environment variables
 dotenv.config();
 
