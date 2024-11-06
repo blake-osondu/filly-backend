@@ -56,7 +56,7 @@ app.post('/api/process-form', async (req, res) => {
     // Prepare the prompt for GPT
   const prompt = `
     I have a web form with the following fields:
-    ${formMap.map(field => `
+    ${formMap.foreach(field => `
       - Field: ${field.label || field.name || field.id}
       - Type: ${field.type}
       - Context: ${field.nearbyText}
